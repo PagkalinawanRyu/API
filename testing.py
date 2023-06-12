@@ -112,41 +112,6 @@ while True:
 
         cv2.imshow('Feature', frame)
 
-        try:
-            with sr.Microphone() as source:
-                print("Ready for Speech...")
-                r.adjust_for_ambient_noise(source, duration=0.2)
-                audio = r.listen(source)
-                text = r.recognize_google(audio, language='en')
-                text = text.lower()
-
-                if "kitchen" in text.lower():
-                    print("You said kitchen")
-                    r = sr.Recognizer()
-                    engine.say("Going to the kitchen")
-                    engine.runAndWait()
-                    continue
-
-                elif "lobby" in text.lower():
-                    print("You said lobby")
-                    r = sr.Recognizer()
-                    engine.say("Going to the lobby")
-                    engine.runAndWait()
-                    continue
-
-                elif "garden" in text.lower():
-                    print("You said garden")
-                    r = sr.Recognizer()
-                    engine.say("Going to the garden")
-                    engine.runAndWait()
-                    continue
-
-        except sr.UnknownValueError:
-            print("Can't Understand Audio...")
-
-        except sr.RequestError as e:
-            print("Could not request results; {0}".format(e))
-
     current_time = datetime.datetime.now().strftime("%H:%M:%S")
     if current_time == alarm_time:
         print("Time to take your medication!")
